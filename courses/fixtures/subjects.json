@@ -1,0 +1,42 @@
+[
+{
+  "model": "courses.subject",
+  "pk": 1,
+  "fields": {
+    "title": "Primero Auxilios",
+    "slug": "primero-auxilios"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 2,
+  "fields": {
+    "title": "Materiales pesados",
+    "slug": "materiales-pesados"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 3,
+  "fields": {
+    "title": "Extintores",
+    "slug": "extintores"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 4,
+  "fields": {
+    "title": "Materiales peligrosos",
+    "slug": "materiales-peligrosos"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 5,
+  "fields": {
+    "title": "Primeros auxilios 2",
+    "slug": "primeros-auxilios-2"
+  }
+}
+]
