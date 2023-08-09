@@ -19,7 +19,7 @@
 
     <div class="ui segment">
         <h3>Course info</h3>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form class="ui form" action="" method="post" enctype="multipart/form-data">
             {{ form.as_p }}
             {% csrf_token %}
             <button type="submit", class="ui button primary">Save content</button>

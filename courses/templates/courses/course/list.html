@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if subject %}
+        {{ subject.title }} courses
+    {% else %}
+        All courses
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if subject %}
+            {{ subject.title }} courses
+        {% else %}
+            All courses
+        {% endif %}
+    </h1>
+
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui vertical fluid tabular menu">
+                <a class="item active" href="{% url "course_list" %}">All</a>
+
+                {% for s in subjects %}
+                <a class="item" href="{% url "course_list_subject" s.slug %}">
+                    {{ s.title }}<br>
+                    <small>{{ s.total_courses }} course{{ s.total_courses|pluralize }}</small>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="twelve wide stretched column">
+            <div class="ui segment">
+                <div class="ui link cards">
+                    {% for course in courses %}
+                    {% with subject=course.subject %}
+                    <div class="card">
+                        <div class="image"><img src="/images/avatar2/large/matthew.png"></div>
+                        <div class="content">
+                            <div class="header">
+                                <a href="{% url "course_detail" course.slug %}">{{ course.title }}</a>
+                            </div>
+                            <div class="meta">
+                                <a>{{ course.total_modules }} modules</a>
+                            </div>
+
+                            <div class="description">
+                                Instructor: {{ course.owner }}
+                            </div>
+                        </div>
+
+                        <div class="extra content">
+                            <span class="right floated">Joined in 2013</span>
+                            <span><i class="user icon"></i>75 Friends</span>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -7,11 +7,12 @@
     <div class="ui segment">
         <h3>Course modules</h3>
 
-        <form method="post">
+        <form class="ui form" method="post">
             {{ formset.as_p }}
             {{ formset.management_form }}
             {% csrf_token %}
-            <button type="submit" class="ui button">Save modules</button>
+            <div class="ui divider"></div>
+            <button type="submit" class="ui button green">Save modules</button>
         </form>
     </div>
 {% endblock content %}

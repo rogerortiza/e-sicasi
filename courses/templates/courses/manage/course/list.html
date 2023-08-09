@@ -4,24 +4,33 @@
 {% block content %}
     <h1> My Courses</h1>
 
-    <div class="ui segment">
-        {% for course in object_list %}
-            <div>
-                <h3> {{ course.title }} </h3>
-                <div>
-                    <a href="{% url "course_edit" course.id %}">Edit</a>
-                    <a href="{% url "course_delete" course.id %}">Delete</a>
-                    <a href="{% url "course_module_update" course.id %}">Edit modules</a>
-                    {% if course.modules.count > 0 %}
-                        <a href="{% url "module_content_list" course.modules.first.id %}">Manage contents</a>
-                    {% endif %}
-                </div>
-            </div>
-        {% empty %}
-            <p>You haven't created any courses yet.</p>
-        {% endfor %}
-        <div>
-            <a href="{% url "course_create" %}" class="button">Create new course</a>
+    {% for course in object_list %}
+    <div class="ui middle aligned divided list">
+        <div class="item">
+          <div class="right floated content">
+            <a class="ui button purple" href="{% url "course_module_update" course.id %}">Modules</a>
+            {% if course.modules.count > 0 %}
+                <a class="ui button purple" href="{% url "module_content_list" course.modules.first.id %}">Manage contents</a>
+            {% endif %}
+            <a class="ui button blue" href="{% url "course_edit" course.id %}">Edit</a>
+            <a class="ui button red" href="{% url "course_delete" course.id %}">Delete</a>
+          </div>
+          <!-- <img class="ui avatar image" src="/images/avatar2/small/lena.png"> -->
+          <div class="content">
+            <h3> {{ course.title }} </h3>
+          </div>
+          <div class="description">{{ course.subject }}</div>
         </div>
     </div>
+
+    <div class="ui divider"></div>
+
+    {% empty %}
+      <p>You haven't created any courses yet.</p>
+    {% endfor %}
+
+    <div>
+        <a class="ui button green" href="{% url "course_create" %}">Create new course</a>
+    </div>
+
 {% endblock content %}
