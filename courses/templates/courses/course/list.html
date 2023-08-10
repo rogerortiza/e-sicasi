@@ -20,10 +20,10 @@
     <div class="ui grid">
         <div class="four wide column">
             <div class="ui vertical fluid tabular menu">
-                <a class="item active" href="{% url "course_list" %}">All</a>
+                <a class="item {% if not subject %} active {% endif %}" href="{% url "course_list" %}">All</a>
 
                 {% for s in subjects %}
-                <a class="item" href="{% url "course_list_subject" s.slug %}">
+                <a class="item {% if subject == s %} active {% endif %}"  href="{% url "course_list_subject" s.slug %}">
                     {{ s.title }}<br>
                     <small>{{ s.total_courses }} course{{ s.total_courses|pluralize }}</small>
                 </a>
@@ -53,7 +53,7 @@
 
                         <div class="extra content">
                             <span class="right floated">Joined in 2013</span>
-                            <span><i class="user icon"></i>75 Friends</span>
+                            <span><i class="clock outline icon"></i>8 hours</span>
                         </div>
                     </div>
                     {% endwith %}

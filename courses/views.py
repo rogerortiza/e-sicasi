@@ -170,7 +170,11 @@ class CourseListView(TemplateResponseMixin, View):
             courses = courses.filter(subject=subject)
 
         return self.render_to_response(
-            {"subjects": subjects, "subject": subject, "courses": courses}
+            {
+                "subjects": subjects,
+                "subject": subject,
+                "courses": courses,
+            }
         )
 
 
@@ -180,9 +184,7 @@ class CourseDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["enroll_form"] = CourseEnrollForm(
-            initial={"course": self.object}
-        )
+        context["enroll_form"] = CourseEnrollForm(initial={"course": self.object})
 
         user_enroll = self.object.students.filter(id=self.request.user.id)
         context["user_enroll"] = user_enroll

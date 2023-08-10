@@ -2,19 +2,40 @@
 {% block title %}My courses{% endblock %}
 {% block content %}
   <h1>My courses</h1>
-  <div class="module">
+
+  <div class="ui divided items">
+
     {% for course in object_list %}
-      <div class="course-info">
-        <h3>{{ course.title }}</h3>
-        <p><a href="{% url "student_course_detail" course.id %}">
-        Access contents</a></p>
+    <div class="item">
+      <div class="image">
+        <img src="/images/wireframe/image.png">
       </div>
+      <div class="content">
+        <a class="header">{{ course.title }}</a>
+        <div class="meta">
+          <span class="cinema">{{ course.subject }}</span>
+        </div>
+        <div class="description">
+          <p></p>
+        </div>
+        <div class="extra">
+          <a href="{% url "student_course_detail" course.id %}" class="ui right floated primary button">
+            Go to the course
+            <i class="right chevron icon"></i>
+          </a>
+          <div class="ui label">Limited</div>
+          <div class="ui label">Limited</div>
+          <div class="ui label">Limited</div>
+        </div>
+      </div>
+    </div>
     {% empty %}
-      <p>
-        You are not enrolled in any courses yet.
-        <a href="{% url "course_list" %}">Browse courses</a>
-        to enroll on a course.
-      </p>
+    <p>
+      You are not enrolled in any courses yet.
+      <a href="{% url "course_list" %}">Browse courses</a>
+      to enroll on a course.
+    </p>
     {% endfor %}
   </div>
+
 {% endblock %}
