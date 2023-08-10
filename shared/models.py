@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.template.loader import render_to_string
 
 class HistoryDates(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -21,3 +22,9 @@ class ItemBase(HistoryDates):
 
     def __str__(self) -> str:
         return self.title
+
+    def render(self):
+        return render_to_string(
+            f"courses/content/{self._meta.model_name}.html",
+            {"item": self}
+        )

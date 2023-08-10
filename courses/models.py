@@ -27,6 +27,7 @@ class Course(HistoryDates):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     overview = models.TextField()
+    students = models.ManyToManyField(User, related_name="courses_joined", blank=True)
 
     class Meta:
         ordering = ["-created"]
@@ -79,3 +80,4 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     url = models.URLField()
+    video = models.FileField(upload_to="videos", null=True)

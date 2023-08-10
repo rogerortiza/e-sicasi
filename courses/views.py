@@ -10,13 +10,14 @@ from django.views.generic.list import ListView
 from .forms import ModuleFormSet
 from .mixins import OwnerCourseEditMixin, OwnerCourseMixin
 from .models import Course, Content, Module, Subject
+from students.forms import CourseEnrollForm
 
 
 # Courses
-class ManageCourseListView(ListView):
+class ManageCourseListView(OwnerCourseMixin, ListView):
     model = Course
     template_name = "courses/manage/course/list.html"
-    permision_required = "courses.view_course"
+    permission_required = "courses.view_course"
 
     def get_queryset(self):
         return super().get_queryset().filter(owner=self.request.user)
@@ -176,3 +177,14 @@ class CourseListView(TemplateResponseMixin, View):
 class CourseDetailView(DetailView):
     model = Course
     template_name = "courses/course/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enroll_form"] = CourseEnrollForm(
+            initial={"course": self.object}
+        )
+
+        user_enroll = self.object.students.filter(id=self.request.user.id)
+        context["user_enroll"] = user_enroll
+
+        return context
